@@ -1,10 +1,12 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
     [SerializeField] private float speed;
-   [SerializeField] private float jumpingPower;
+    [SerializeField] private float jumpingPower;
+    [SerializeField] private float fallingForce;
     private bool isFacingRight = true;
     public bool isGrounded;
 
@@ -24,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
         }
 
         Flip();
