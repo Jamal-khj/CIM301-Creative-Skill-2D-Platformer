@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyScripting : MonoBehaviour
 {
     public PlayerHealth playerHealth;
-    [SerializeField] private int damage;
+    public int damage;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int health;
-    [SerializeField] private int maxHealth;
+    public int health;
+    public int maxHealth;
+
+  //  public SpriteRenderer playerSr;
+    public PlayerMovement playerMovement;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,6 +19,8 @@ public class PlayerHealth : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
+       //     playerSr.enabled = false;
+            playerMovement.enabled = false;
             Destroy(gameObject);
         }
     }
