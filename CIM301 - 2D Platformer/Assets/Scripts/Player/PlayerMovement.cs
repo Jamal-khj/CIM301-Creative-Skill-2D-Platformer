@@ -17,19 +17,22 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
-
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (!PauseMenu.isPaused)
         {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
-        }
+            horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
-        }
+            if (Input.GetButtonDown("Jump") && IsGrounded())
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
+            }
 
-        Flip();
+            if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+            {
+                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
+            }
+
+            Flip();
+        }
     }
 
     private void FixedUpdate()
