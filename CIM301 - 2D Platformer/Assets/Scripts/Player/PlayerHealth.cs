@@ -19,9 +19,8 @@ public class PlayerHealth : MonoBehaviour
         health -= amount;
         if(health <= 0)
         {
-       //     playerSr.enabled = false;
             playerMovement.enabled = false;
-            Destroy(gameObject);
+            Time.timeScale = 0f;
         }
     }
 
