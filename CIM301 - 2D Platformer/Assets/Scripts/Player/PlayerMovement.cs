@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     [SerializeField] private float speed;
     [SerializeField] private float jumpingPower;
-    [SerializeField] private float fallingForce;
+    //[SerializeField] private float fallingForce;
     private bool isFacingRight = true;
     public bool isGrounded;
 
@@ -19,17 +19,24 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!PauseMenu.isPaused)
         {
+            // Movement
             horizontal = Input.GetAxisRaw("Horizontal");
 
+            // Jumping
             if (Input.GetButtonDown("Jump") && IsGrounded())
             {
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
             }
 
-            if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-            {
-                rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
-            }
+            //if (Input.GetButtonDown("Jump") && IsGrounded())
+            //{
+            //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
+            //}
+
+            //if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+            //{
+            //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
+            //}
 
             Flip();
         }
@@ -42,8 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
-        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.2f);
-        return Physics.Raycast(groundCheck.position, Vector3.down, 0.2f);
+        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, 0.3f);
+        return Physics.Raycast(groundCheck.position, Vector3.down, 0.3f);
     }
 
     private void Flip()
