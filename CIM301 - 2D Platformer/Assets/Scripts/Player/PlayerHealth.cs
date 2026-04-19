@@ -14,9 +14,9 @@ public class PlayerHealth : MonoBehaviour
         health = maxHealth;
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int damage)
     {
-        health -= amount;
+        health -= damage;
         if(health <= 0)
         {
             playerMovement.enabled = false;

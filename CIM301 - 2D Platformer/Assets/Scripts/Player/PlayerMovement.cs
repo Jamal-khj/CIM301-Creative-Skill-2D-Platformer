@@ -14,6 +14,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+
+    public bool KnockFromRight;
+
     // Update is called once per frame
     void Update()
     {
@@ -28,23 +34,29 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
             }
 
-            //if (Input.GetButtonDown("Jump") && IsGrounded())
-            //{
-            //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
-            //}
-
-            //if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
-            //{
-            //    rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * fallingForce);
-            //}
-
             Flip();
         }
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+        if(KBCounter <= 0)
+        {
+            rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+        }
+        else
+        {
+            if(KnockFromRight == true)
+            {
+                rb.linearVelocity = new Vector3(-KBForce, KBForce);
+            }
+            if (KnockFromRight == false)
+            {
+                rb.linearVelocity = new Vector3(KBForce, KBForce);
+            }
+
+            KBCounter -= Time.deltaTime;
+        }
     }
 
     private bool IsGrounded()
