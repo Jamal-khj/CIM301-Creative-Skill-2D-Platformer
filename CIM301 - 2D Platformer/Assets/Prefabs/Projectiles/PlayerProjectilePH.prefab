@@ -157,5 +157,7 @@ MonoBehaviour:
   speed: 11
   projectileLife: 5
   projectileCount: 0
+  enemyHealth: {fileID: 0}
+  damage: 1
   playerMovement: {fileID: 0}
   facingRight: 0
