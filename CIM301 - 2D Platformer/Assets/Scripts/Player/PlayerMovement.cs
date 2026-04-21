@@ -4,15 +4,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float horizontal;
-    [SerializeField] private float speed;
-    [SerializeField] private float jumpingPower;
+    public float speed;
+    public float jumpingPower;
     //[SerializeField] private float fallingForce;
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     public bool isGrounded;
 
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
+    public Rigidbody rb;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
 
     public float KBForce;
     public float KBCounter;

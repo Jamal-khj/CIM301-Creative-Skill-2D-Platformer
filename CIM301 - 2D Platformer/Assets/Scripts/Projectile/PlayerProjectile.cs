@@ -10,13 +10,22 @@ public class PlayerProjectile : MonoBehaviour
     public float projectileLife;
     public float projectileCount;
 
-    public EnemyHealth enemyHealth;
-    public int damage;
+    //public int damage;
+
+    public PlayerMovement playerMovement;
+    public bool facingRight;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         projectileCount = projectileLife;
+        playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        facingRight = playerMovement.isFacingRight;
+
+        if (!facingRight)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
     }
 
     // Update is called once per frame
@@ -32,16 +41,22 @@ public class PlayerProjectile : MonoBehaviour
 
     private void FixedUpdate()
     {
-        projectileRB.linearVelocity = new Vector3(speed, projectileRB.linearVelocity.y);
+        if (facingRight)
+        {
+            projectileRB.linearVelocity = new Vector3(speed, projectileRB.linearVelocity.y);
+        }
+        else
+        {
+            projectileRB.linearVelocity = new Vector3(-speed, projectileRB.linearVelocity.y);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            Destroy(collision.gameObject);
         }
-
-        enemyHealth.TakeDamage(damage);
+        Destroy(gameObject);
     }
 }
